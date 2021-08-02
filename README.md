@@ -23,7 +23,7 @@ npm run serve
 ```
 3.  打包
 ```
-npm run build
+npm run build:prod
 ```
 
 #### 参与贡献
