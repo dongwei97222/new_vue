@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // layout:'top_bottom',
+    layout:'left_right',
   },
   mutations: {
   },

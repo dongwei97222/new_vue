@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <!-- //left to right -->
+  <div v-if="layout" id="app">
     <div class="leftNav">
       <LeftNav />
     </div>
@@ -10,6 +11,22 @@
       <div class="rightContent">
         <router-view />
       </div>
+    </div>
+    <!-- <div class="right">........</div> -->
+  </div>
+
+<!-- //top top bottom -->
+  <div v-else id="top_bottom">
+    <div class="top">
+      <span>{{title}}</span>
+    </div>
+    <div class="center">
+      <router-view />
+    </div>
+    <div class="footer">
+      <p>第一行</p>
+      <p>第二行</p>
+      <p>第三行</p>
     </div>
   </div>
 </template>
@@ -23,7 +40,8 @@ export default {
   },
   data () {
     return {
-      title: this.$route.name
+      title: this.$route.name,
+      layout:true
     }
   },
   computed: {
@@ -35,7 +53,15 @@ export default {
     getTitle (newVal, oldVal) {
       this.title = newVal
     }
-  }
+  },
+  mounted(){
+    console.log(this.$store.state.layout)
+    if(this.$store.state.layout=='left_right'){
+      this.layout=true
+    }else{
+      this.layout=false
+    }
+  },
 }
 </script>
 
@@ -45,17 +71,21 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  display: flex;
+  font-size: 0.16rem;
+
 }
 
 .leftNav {
   max-width: 30%;
-  height: 100%;
+  height: 100vh;
   display: block;
-  float: left;
-      overflow-y: auto;
+  overflow-y: auto;
+  background-color: rgb(84, 92, 100);
 }
 .content {
   overflow-y: auto;
+  flex: 1;
   width: auto;
   text-align: center;
   display: flow-root;
@@ -99,5 +129,32 @@ export default {
  box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
  background   : #ededed;
  border-radius: 10px;
+ }
+
+
+ //top to bottom
+ #top_bottom{
+    font-size: 0.16rem;
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   .top{
+      text-align: left;
+      padding-left: 20px;
+      line-height: 64px;
+      box-shadow: 0px 3px 4px #888888;
+   }
+   .center{
+     flex: 1;
+     overflow-y: scroll;
+   }
+   .footer{
+     max-height: 120px;
+     background-color: #eee;
+     p{
+       text-align: center;
+     }
+   }
  }
 </style>
