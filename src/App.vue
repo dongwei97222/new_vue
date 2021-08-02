@@ -100,7 +100,10 @@ export default {
     box-shadow: 0px 3px 4px #888888;
   }
   .rightContent {
-    padding: 20px;
+    height: calc(100vh - 68px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    // padding: 20px;
   }
 }
 
